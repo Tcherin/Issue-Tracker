@@ -3,7 +3,7 @@ import prisma from "@/prisma/client";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import delay from "delay";
 import { notFound } from "next/navigation";
-import Markdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
   params: { id: string };
@@ -16,6 +16,8 @@ const IssueDetailPage = async ({ params }: Props) => {
 
   if (!issue) notFound();
 
+  await delay(3000);
+
   return (
     <div>
       <Heading>{issue.title}</Heading>
@@ -24,7 +26,7 @@ const IssueDetailPage = async ({ params }: Props) => {
         <Text>{issue.createdAt.toDateString()}</Text>
       </Flex>
       <Card className="prose" mt="4">
-        <Markdown>{issue.description}</Markdown>
+        <ReactMarkdown>{issue.description}</ReactMarkdown>
       </Card>
     </div>
   );
