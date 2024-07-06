@@ -37,9 +37,11 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       if (issue) axios.patch("/api/issues/" + issue.id, data);
       else await axios.post("/api/issues", data);
       router.push("/issues");
-    } catch (error) {}
-    setIsSubmitting(false);
-    setError("An error has occurred");
+      router.refresh();
+    } catch (error) {
+      setIsSubmitting(false);
+      setError("An error has occurred");
+    }
   });
 
   return (
